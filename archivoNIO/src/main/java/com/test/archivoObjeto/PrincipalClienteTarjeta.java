@@ -19,18 +19,19 @@ public class PrincipalClienteTarjeta {
         boolean continuar = true;
         //instanciamos la clase OperacionesClienteTarjeta
         OperacionesClienteTarjeta obj = new OperacionesClienteTarjeta();
-        
 
         do {
-            System.out.println("===================");
+            System.out.println("________________________");
             System.out.println("1.- Crear archivo");
             System.out.println("2.- Registrar cliente / tarjeta");
             System.out.println("3.- Guardar los registros");
             System.out.println("4.- Mostrar datos");
             System.out.println("5.- Bloquear tarjeta");
             System.out.println("6.- Depositar dinero");
-            System.out.println("7.- Salir");
+            System.out.println("7.- Retirar dinero");
+            System.out.println("8.- Salir");
             System.out.println("Digite una opción");
+            System.out.println("________________________");
             opc = entrada.nextInt();
             switch (opc) {
                 case 1:
@@ -65,6 +66,15 @@ public class PrincipalClienteTarjeta {
                     System.out.println("Digite el monto que desea depositar");
                     double m = entrada.nextDouble();
                     obj.depositar(ced, m);
+                    obj.guardarObjetos();
+                    break;
+                case 7:
+                    obj.leerClientes();
+                    System.out.println("Digite el numero de cedula");
+                    int cedula = entrada.nextInt();
+                    System.out.println("Digite el monto que desea retirar");
+                    double montoRetiro = entrada.nextDouble();
+                    obj.retirar(cedula, montoRetiro);
                     obj.guardarObjetos();
                     break;
                 default:

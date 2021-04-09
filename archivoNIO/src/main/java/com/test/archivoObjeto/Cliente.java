@@ -23,18 +23,17 @@ public class Cliente implements Serializable {
    private TarjetaDebito tarjeta;
     //metodo mostrar informacion
     public void mostrarCliente(){
-        System.out.println("*****CLIENTE******");
+        System.out.println("************************");
+        System.out.println("-----CLIENTE------");
         System.out.println("Nombre: "+this.nombre);
         System.out.println("Apellido Paterno: "+this.paterno);
         System.out.println("Apellido Materno: "+this.materno);
         System.out.println("Cedula: "+this.cedula);
-         System.out.println("*****************");
         if(tarjeta != null){
             tarjeta.mostrarTarjeta();
         }else{
             System.out.println("El cliente no tiene aún una tarjeta de debito");
         }
-        System.out.println("===============================");
     }
     //getter and setter
 

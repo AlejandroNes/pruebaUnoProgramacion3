@@ -80,13 +80,15 @@ public class OperacionesClienteTarjeta {
                     if(cliente.getCedula() == cedula){
                         sw = 1;
                         cliente.getTarjeta().setEstado("Inactivo");
-                        System.out.println("*****************");
+                        System.out.println("'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''");
                         System.out.println("Se bloqueo la tarjeta");
-                        System.out.println("*****************");
+                        System.out.println("'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''");
                     }
                }
                if(sw == 0){
+                   System.out.println("'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''");
                    System.out.println("El cliente no esta registrado");
+                   System.out.println("'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''");
                }
            }
        }
@@ -104,12 +106,49 @@ public class OperacionesClienteTarjeta {
                             cliente.getTarjeta().setSaldo(saldo);
                             System.out.println("Se realizo el deposito");
                         }else{
+                            System.out.println("'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''");
                             System.out.println("La tarjeta esta bloqueada! comuniquese con el banco");
+                            System.out.println("'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''");
                         }
                     }
                }
                if(sw == 0){
+                   System.out.println("'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''");
                    System.out.println("El cliente no esta registrado");
+                   System.out.println("'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''");
+               }
+           }
+       }
+       
+       //Retirar un  monto de la tarjeta de debito siempre que este activa y tenga fondos
+           public void retirar (int cedula, double monto){
+           int sw = 0;
+           if(listaCliente != null){
+               for(Cliente cliente:listaCliente){
+                    if(cliente.getCedula() == cedula){
+                        sw = 1;
+                        if(cliente.getTarjeta().getEstado().equals("ACTIVO")){
+                            double saldo = cliente.getTarjeta().getSaldo();
+                            if(monto < saldo){
+                                saldo -= monto;
+                            cliente.getTarjeta().setSaldo(saldo);
+                            System.out.println("Se realizo el retiro correctamente");
+                            }else{
+                                System.out.println("'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''");
+                                System.out.println("Usted cuenta con un saldo menor al que quiere retirar");
+                                System.out.println("'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''");
+                            }
+                        }else{
+                            System.out.println("'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''");
+                            System.out.println("La tarjeta esta bloqueada! comuniquese con el banco");
+                            System.out.println("'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''");
+                        }
+                    }
+               }
+               if(sw == 0){
+                   System.out.println("'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''");
+                   System.out.println("El cliente no esta registrado");
+                   System.out.println("'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''");
                }
            }
        }

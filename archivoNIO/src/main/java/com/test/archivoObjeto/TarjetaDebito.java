@@ -21,12 +21,12 @@ public class TarjetaDebito implements Serializable{
     
     //metodos
     public void mostrarTarjeta(){
-        System.out.println("*****TARJETA*******");
+        System.out.println("-------TARJETA--------");
         System.out.println("Numero de tarjeta: "+this.nroTarjeta);
          System.out.println("Numero de Cuenta: "+this.nroCuenta);
         System.out.println("Saldo: "+this.saldo);
         System.out.println("Estado: "+this.estado);
-        System.out.println("*******************");
+        System.out.println("************************");
     }
 
     public int getNroTarjeta() {
