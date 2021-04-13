@@ -12,79 +12,62 @@ import java.util.Scanner;
  * @author AlejandroNes
  */
 public class Principal {
-    public static void main(String[] args) {
-        int x = 0;
-        boolean seguir = true;
-        Operaciones om = new Operaciones();
-        Scanner leer = new Scanner(System.in);
+     public static void main(String[] args) {
+        
+           boolean next = true;
+        int opc = 0;
+        Scanner read = new Scanner(System.in);
+        Operaciones op= new Operaciones();
         do {
-            System.out.println("                MENU DE OPCIONES            ");
-            System.out.println("    1. Crear Archivo                        ");
-            System.out.println("    2. Registrar Proyecto de Grado          ");
-            System.out.println("    3. Registrar Libro                      ");
-            System.out.println("    4. Guardar los Datos                    "); 
-            System.out.println("    5. Mostrar Material Bibliografico       ");
-            System.out.println("    6. Buscar Proyecto                      ");
-            System.out.println("    7. Buscar Libro                         ");
-            System.out.println("    8. Eliminar Libro o Proyecto            ");
-            System.out.println("    9. Cerrar el programa                   ");
-            System.out.print("      Elija una opcion:                       ");
-            x = leer.nextInt();
-            System.out.println("--------------------------------------------");
-            switch (x) {
+            System.out.println("######  Menu  #######");
+            System.out.println("1 Registrar Biblioteca y Adicionar materialBibilografica");
+            System.out.println("2 Mostrar todos los libros o proyectos de la BIblioteca");
+            System.out.println("3 Buscar un libro por determinado titulo");
+            System.out.println("4 Buscar proyecto por determinado revisor");
+            
+            System.out.println("5 ELIMINAR proyecto o libro");
+            System.out.println("---files---");
+            System.out.println("6 Crear archivo");
+          //  System.out.println("7 Guardar los registros");
+           
+            System.out.println("8 Exit");
+            System.out.println("Digite one opcion");
+            opc = read.nextInt();
+
+            switch (opc) {
                 case 1:
-                    om.CrearArchivo();
+                    op.leerObjetos();
+                    op.create();
+                    op.guardarObjetos();
                     break;
                 case 2:
-                    String p = "S";
-                    while(p.equalsIgnoreCase("S")){
-                        leer.nextLine();
-                        om.AñadirProyecto();
-                        System.out.print("¿Continuar registrando proyectos?   S/N   : ");
-                        p = leer.nextLine();
-                        System.out.println("");
-                    }                    
+                    op.leerObjetos();
+                    op.show();
                     break;
                 case 3:
-                    String l = "S";
-                    while(l.equalsIgnoreCase("S")){
-                        leer.nextLine();
-                        om.AñadirLibro();
-                        System.out.print("¿Continuar registrando libros?   S/N   : ");
-                        l = leer.nextLine();
-                        System.out.println("");
-                    }                    
+                    op.leerObjetos();
+                    op.searchBook();
                     break;
                 case 4:
-                    om.AlmacenarDatosPro();
-                    om.AlmacenarDatosLib();
-                    System.out.println("        DATOS ALMACENADOS CON EXITO!!!      ");
-                    System.out.println("");
+                    op.leerObjetos();
+                    op.RevisorSearch();
                     break;
                 case 5:
-                    om.LeerMaterial();
-                    om.MostrarMaterial();
+                    op.leerObjetos();
+                    op.DropBookProject();
+                    op.guardarObjetos();
                     break;
                 case 6:
-                    om.LeerMaterial();
-                    System.out.print("Ingrese el titulo a buscar: ");
-                    String proy = leer.nextLine();
-                    om.BuscarProyecto(proy);
+                    op.crearArchivo();
                     break;
                 case 7:
-                    om.LeerMaterial();
-                    System.out.print("Ingrese el titulo a buscar: ");
-                    String libro= leer.nextLine();
-                    om.BuscarLibro(libro);
-                    break;
-                case 8:
-                    om.LeerMaterial();
-                    System.out.print("Ingrese el titulo a eliminar: ");
+                    op.guardarObjetos();
                     break;
                 default:
-                    seguir = false;
+                    next = false;
                     break;
             }
-        } while (seguir);
+        } while (next);
     }
+    
 }

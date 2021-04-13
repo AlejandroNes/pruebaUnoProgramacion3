@@ -22,192 +22,226 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author SmartUrban2025
+ * @author AlejandroNes
  */
-public class Operaciones{
+public class Operaciones {
 
-    List<ProyectoGrado> ListaProyecto;
-    List<Libro> ListaLibro;
-    List<MaterialBibliografico> ListaMaterial;
+    private String nombre;
+    private String direccion;
     Scanner leer = new Scanner(System.in);
 
+    private List<MaterialBibliografico> library;
+
     public Operaciones() {
-        ListaProyecto = new ArrayList<>();
-        ListaLibro = new ArrayList<>();
-        ListaMaterial = new ArrayList<>();
+        library = new ArrayList<>();
     }
 
-    public void AñadirProyecto() {
-        MaterialBibliografico mb = new MaterialBibliografico();
-        ProyectoGrado pg = new ProyectoGrado();
-        System.out.print("Ingrese Titulo del Proyecto   : ");
-        mb.setTitulo(leer.nextLine());
-        System.out.print("Ingrese Autor del Proyecto    : ");
-        mb.setAutor(leer.nextLine());
-        System.out.print("Ingrese Tutor del Proyecto    : ");
-        pg.setTutor(leer.nextLine());
-        System.out.print("Ingrese Revisor del Proyecto  : ");
-        pg.setRevisor(leer.nextLine());
-        mb.setProyectogrado(pg);
-        ListaMaterial.add(mb);
-        System.out.println("        PROYECTO REGISTRADO CON EXITO        ");
-        System.out.println("                                             ");
-    }
+    public void create() {
+        System.out.println("Digite Nombre:");
+        nombre = leer.nextLine();
 
-    public void AñadirLibro() {
-        MaterialBibliografico mb = new MaterialBibliografico();
-        Libro li = new Libro();
-        System.out.print("Ingrese Titulo del Libro      : ");
-        mb.setTitulo(leer.nextLine());
-        System.out.print("Ingrese Autor del Libro       : ");
-        mb.setAutor(leer.nextLine());
-        System.out.print("Ingrese Edicion del Libro     : ");
-        li.setEdicion(leer.nextInt());
-        System.out.print("Ingrese Area del Libro        : ");
-        li.setArea(leer.nextLine());
-        mb.setLibro(li);
-        ListaMaterial.add(mb);
-        System.out.println("        LIBRO REGISTRADO CON EXITO        ");
-    }
+        System.out.println("Digite la Direccion:");
+        nombre = leer.nextLine();
 
-    public void MostrarMaterial() {
-        if (ListaMaterial != null) {
-            System.out.println("            MATERIAL BIBLIOGRAFICO           ");
-            for (Libro liAux : ListaLibro) {
-                liAux.MostrarLibro();
+        //***************************
+        //String opc;
+        boolean next = true;
+        do {
+            System.out.println("######  Sub Menu  #######");
+            System.out.println("1 Registrar LIBRO");
+            System.out.println("2 Registrar PROYECTO DE GRADO");
+            System.out.println("3 Exit");
+            System.out.println("Digite one opcion");
+            int opc = leer.nextInt();
+            leer.nextLine();
+
+            switch (opc) {
+                case 1:
+                    Libro book = new Libro();
+                    System.out.println("Digite el TItulo");
+                    book.setTitulo(leer.nextLine());
+                    System.out.println("Digite el Autor");
+                    book.setAutor(leer.nextLine());
+                    System.out.println("Digite La edicion (one number)");
+                    book.setEdicion(leer.nextInt());
+                    leer.nextLine();
+                    System.out.println("Digite el area");
+                    book.setArea(leer.nextLine());
+                    library.add(book);
+                    break;
+                case 2:
+                    //op.buscarCan();
+                    ProyectoGrado pro = new ProyectoGrado();
+                    System.out.println("Digite el TItulo");
+                    pro.setTitulo(leer.nextLine());
+                    System.out.println("Digite el Autor");
+                    pro.setAutor(leer.nextLine());
+                    System.out.println("Digite el tutor");
+                    pro.setTutor(leer.nextLine());
+                    System.out.println("Digite el revisor");
+                    pro.setRevisor(leer.nextLine());
+                    library.add(pro);
+                    break;
+                default:
+                    next = false;
+                    break;
             }
-        }
-        System.out.println("");
+        } while (next);
+        //**********************
+
     }
 
-    public void BuscarLibro(String libro) {
-        int x = 0;
-        if (ListaMaterial != null) {
-            for (MaterialBibliografico lb : ListaMaterial) {
-                if (lb.getTitulo() == libro) {
-                    x = 1;
-                    lb.getLibro();
-                }
-                if (x == 0) {
-                    System.out.println("        EL LIBRO NO SE ENCUENTRA EN EL MATERIAL BIBLIOGRAFICO!!!        ");
-                    System.out.println("");
-                }
-            }
-        }
-    }
+    public void show() {
+        if (!library.isEmpty()) {
+            System.out.println("------LISTA DEMATERIAL BIBLIOGRAFICO------");
+            for (MaterialBibliografico emp : library) {
+                if (emp instanceof Libro) {
 
-    public void BuscarProyecto(String proy) {
-        int x = 0;
-        if (ListaMaterial != null) {
-            for (MaterialBibliografico lb : ListaMaterial) {
-                if (lb.getTitulo() == proy) {
-                    x = 1;
-                    lb.getProyectogrado();
-                }
-                if (x == 0) {
-                    System.out.println("        EL PROYECTO NO SE ENCUENTRA EN EL MATERIAL BIBLIOGRAFICO!!!        ");
-                    System.out.println("");
+                    Libro bo = (Libro) emp;
+                    bo.mostrar();
+                    System.out.println("-------------");
+                } else {
+
+                    ProyectoGrado pr = (ProyectoGrado) emp;
+                    pr.mostrar();
+                    System.out.println("------------------");
                 }
             }
         }
     }
 
-    public void CrearArchivo() {
-        Path path = Paths.get("C:\\ProgramacionIII\\materialBibliografico.txt");
+    public void searchBook() {
+        //Buscar un determinado libro por titulo
+        System.out.println("DIGITE EL TITULO DEL LIBRO:");
+        String title = leer.nextLine();
+        boolean ss = false;
+        //*************
+        for (MaterialBibliografico emp : library) {
+            if (emp.getTitulo().equalsIgnoreCase(title)) {
+                ss = true;
+                System.out.println("++++ENCONTRADO++++");
+                emp.mostrar();
+            }
+        }
+        if (!ss) {
+            System.out.println("NO EXISTE");
+        }
+
+    }
+
+    public void RevisorSearch() {
+
+        System.out.println("DIGITE EL REVISOR:");
+        String revisor = leer.nextLine();
+
+        boolean ff = false;
+        //*************
+        for (MaterialBibliografico emp : library) {
+
+            if (emp instanceof ProyectoGrado) {
+                ProyectoGrado pr = (ProyectoGrado) emp;
+                if (pr.getRevisor().equalsIgnoreCase(revisor)) {
+                    System.out.println("++++ENCONTRADO++++");
+                    pr.mostrar();
+                    ff = true;
+
+                    break;
+                }
+            }
+
+        }
+        /*  if (!ff) {
+            System.out.print("NO EXISTE");
+        }*/
+        System.out.print((!ff) ? "\nNO EXISTE" : "");
+
+    }
+
+    public void DropBookProject() {
+        System.out.println("DIGITE EL Projecto o libro a Eliminar:(titulo)");
+        String re = leer.nextLine();
+        boolean ff = false;
+
+        for (MaterialBibliografico emp : library) {
+            if (emp instanceof Libro) {
+
+                Libro bo = (Libro) emp;
+
+                if (bo.getTitulo().equalsIgnoreCase(re)) {
+                    //bo.mostrar();
+                    ff = true;
+                    library.remove(bo);
+
+                    System.out.println("------ELIMINADO-------");
+                    break;
+                }
+
+            } else {
+                ProyectoGrado pr = (ProyectoGrado) emp;
+                if (pr.getTitulo().equalsIgnoreCase(re)) {
+                    //pr.mostrar();
+                    library.remove(pr);
+                    ff = true;
+                    System.out.println("------ELIMINADO-------");
+                    break;
+                }
+
+            }
+
+        }
+        System.out.print((!ff) ? "\nNO EXISTE" : "");
+
+    }
+
+    /*++++++++++++MANEJO DE ARCHIVOS++++++++++++++++*/
+
+    //CREANDO UN ARCHIVO
+    public void crearArchivo() {
+        //ya debe estar creado el directorio D:\\programacionIII
+        Path path = Paths.get("C:\\ProgramacionIII\\archivoBibliografia.txt");
         try {
             if (!Files.exists(path)) {
                 Files.createFile(path);
-                System.out.println("        ARCHIVO CREADO CON EXITO...     ");
-                System.out.println("");
+                System.out.println("El archivo se creo correctamente");
             } else {
-                System.out.println("        EL ARCHIVO YA EXISTE...     ");
-                System.out.println("");
+                System.out.println("El archivo ya existe");
             }
         } catch (Exception e) {
         }
     }
-
-    public void AlmacenarDatosPro() {
-        String location = "C:\\ProgramacionIII\\materialBibliografico.txt";
+    
+    
+    //guardando la listacliente dentro del archivo creado con anterioridad
+    public void guardarObjetos() {
+        String ruta = "C:\\ProgramacionIII\\archivoBibliografia.txt";
         try {
-            FileOutputStream archivo = new FileOutputStream(location);
-            ObjectOutputStream oos = new ObjectOutputStream(archivo);
-            oos.writeObject(ListaProyecto);
+            //****SERIALIZAN(BITS) PARA QUE SE GUARDE DENTRO EL ARCHIVO*****
+            FileOutputStream archivo = new FileOutputStream(ruta);//INIALIZAMOS EL ARCHIVO
+            ObjectOutputStream oos = new ObjectOutputStream(archivo);//podamos guardar dentro del archivo
+            //*******
+            oos.writeObject(library);
             oos.close();
             archivo.close();
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Operaciones.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(Operaciones.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        System.out.println("");
-    }
 
-    public void AlmacenarDatosLib() {
-        String location = "C:\\ProgramacionIII\\materialBibliografico.txt";
-        try {
-            FileOutputStream archivo = new FileOutputStream(location);
-            ObjectOutputStream oos = new ObjectOutputStream(archivo);
-            oos.writeObject(ListaLibro);
-            oos.close();
-            archivo.close();
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(Operaciones.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(Operaciones.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println("");
-    }
-
-    public void LeerProyectos() {
-        String location = "C:\\ProgramacionIII\\materialBibliografico.txt";
-        try {
-            FileInputStream archivo = new FileInputStream(location);
-            ObjectInputStream ois = new ObjectInputStream(archivo);
-            if (ois != null) {
-                ListaProyecto = (List<ProyectoGrado>) ois.readObject();
-            } else {
-                System.out.println("        EL OBJETO ES NULO       ");
-            }
-        } catch (FileNotFoundException e) {
-            Logger.getLogger(Operaciones.class.getName()).log(Level.SEVERE, null, e);
-        } catch (IOException ex) {
-            Logger.getLogger(Operaciones.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Operaciones.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        System.out.println("");
-    }
-
-    public void LeerLibros() {
-        String location = "C:\\ProgramacionIII\\materialBibliografico.txt";
-        try {
-            FileInputStream archivo = new FileInputStream(location);
-            ObjectInputStream ois = new ObjectInputStream(archivo);
-            if (ois != null) {
-                ListaLibro = (List<Libro>) ois.readObject();
-            } else {
-                System.out.println("        EL OBJETO ES NULO       ");
-            }
-        } catch (FileNotFoundException e) {
-            Logger.getLogger(Operaciones.class.getName()).log(Level.SEVERE, null, e);
-        } catch (IOException ex) {
-            Logger.getLogger(Operaciones.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Operaciones.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        System.out.println("");
     }
     
-    public void LeerMaterial() {
-        String location = "C:\\ProgramacionIII\\materialBibliografico.txt";
+    //cargamos los datos del archivo a un list<Cliente>
+    public void leerObjetos() {
+        String ruta = "C:\\ProgramacionIII\\archivoBibliografia.txt";
         try {
-            FileInputStream archivo = new FileInputStream(location);
+
+            FileInputStream archivo = new FileInputStream(ruta);
             ObjectInputStream ois = new ObjectInputStream(archivo);
+
             if (ois != null) {
-                ListaMaterial = (List<MaterialBibliografico>) ois.readObject();
+                library = (List<MaterialBibliografico>) ois.readObject();//realizamos un casteo
             } else {
-                System.out.println("        EL OBJETO ES NULO       ");
+                System.out.println("El objeto es nulo");
             }
         } catch (FileNotFoundException e) {
             Logger.getLogger(Operaciones.class.getName()).log(Level.SEVERE, null, e);
@@ -216,6 +250,7 @@ public class Operaciones{
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Operaciones.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println("");
     }
+    
+
 }
