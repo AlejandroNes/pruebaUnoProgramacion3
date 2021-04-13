@@ -19,41 +19,42 @@ public class Principal {
         Scanner read = new Scanner(System.in);
         Operaciones op= new Operaciones();
         do {
-            System.out.println("------------------MENU PRINCIPAL--------------------");
-            System.out.println("1.- Adicionar materialBibilografico y registrar");
+            System.out.println("______________MENU PRINCIPAL________________");
+            System.out.println("1.- Adicionar material bibilografico y registrar");
             System.out.println("2.- Mostrar todos los libros o proyectos que pertenecen a la Biblioteca");
             System.out.println("3.- Buscar un determinado libro por  titulo");
-            System.out.println("4.- Buscar un determinado proyecto por revisor");//revisor
+            System.out.println("4.- Buscar un determinado proyecto por revisor");
             
-            System.out.println("5 Eliminar un Libro o Proyecto de grado por deterioro");
-            System.out.println("6 Crear archivo");
-            System.out.println("7 Guardar los registros");
+            System.out.println("5.- Eliminar un Libro o Proyecto de grado por deterioro");
+            System.out.println("6.- Crear archivo");
+            System.out.println("7.- Guardar los registros");
            
-            System.out.println("8 Salir");
-            System.out.println("Digite one opcion");
+            System.out.println("8.- Salir");
+            System.out.println("Ingrese una opcion");
+            System.out.println("___________________________________________");
             opc = read.nextInt();
 
             switch (opc) {
                 case 1:
                     op.leerObjetos();
-                    op.create();
+                    op.crear();
                     op.guardarObjetos();
                     break;
                 case 2:
                     op.leerObjetos();
-                    op.show();
+                    op.mostrarLista();
                     break;
                 case 3:
                     op.leerObjetos();
-                    op.searchBook();
+                    op.buscarLibro();
                     break;
                 case 4:
                     op.leerObjetos();
-                    op.RevisorSearch();
+                    op.BuscarRevisor();
                     break;
                 case 5:
                     op.leerObjetos();
-                    op.DropBookProject();
+                    op.EliminarProyecto();
                     op.guardarObjetos();
                     break;
                 case 6:

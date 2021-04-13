@@ -17,6 +17,8 @@ public class Libro extends MaterialBibliografico  implements Serializable{
         super.mostrar();
         System.out.println("Edicion: "+edicion);
         System.out.println("Area:  "+area);
+        System.out.println("============LIBRO================");
+        System.out.println("");
     }
    
 

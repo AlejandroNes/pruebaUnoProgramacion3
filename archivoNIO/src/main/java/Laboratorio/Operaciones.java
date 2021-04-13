@@ -32,7 +32,7 @@ public class Operaciones {
         library = new ArrayList<>();
     }
 
-    public void create() {
+    public void crear() {
         System.out.println("Digite el Nombre:");
         nombre = leer.nextLine();
 
@@ -53,30 +53,29 @@ public class Operaciones {
 
             switch (opc) {
                 case 1:
-                    Libro book = new Libro();
-                    System.out.println("Ingrese el TItulo");
-                    book.setTitulo(leer.nextLine());
+                    Libro libro = new Libro();
+                    System.out.println("Ingrese el Titulo");
+                    libro.setTitulo(leer.nextLine());
                     System.out.println("Ingrese el Autor");
-                    book.setAutor(leer.nextLine());
+                    libro.setAutor(leer.nextLine());
                     System.out.println("Ingrese su edicion");
-                    book.setEdicion(leer.nextInt());
+                    libro.setEdicion(leer.nextInt());
                     leer.nextLine();
                     System.out.println("Ingrese el area");
-                    book.setArea(leer.nextLine());
-                    library.add(book);
+                    libro.setArea(leer.nextLine());
+                    library.add(libro);
                     break;
                 case 2:
-                    //op.buscarCan();
-                    ProyectoGrado pro = new ProyectoGrado();
-                    System.out.println("Digite el TItulo");
-                    pro.setTitulo(leer.nextLine());
+                    ProyectoGrado proyecto = new ProyectoGrado();
+                    System.out.println("Digite el Titulo");
+                    proyecto.setTitulo(leer.nextLine());
                     System.out.println("Digite el Autor");
-                    pro.setAutor(leer.nextLine());
+                    proyecto.setAutor(leer.nextLine());
                     System.out.println("Digite el tutor");
-                    pro.setTutor(leer.nextLine());
+                    proyecto.setTutor(leer.nextLine());
                     System.out.println("Digite el revisor");
-                    pro.setRevisor(leer.nextLine());
-                    library.add(pro);
+                    proyecto.setRevisor(leer.nextLine());
+                    library.add(proyecto);
                     break;
                 default:
                     estado = false;
@@ -86,18 +85,18 @@ public class Operaciones {
 
     }
 
-    public void show() {
+    public void mostrarLista() {
         if (!library.isEmpty()) {
             System.out.println("------LISTA DE MATERIAL BIBLIOGRAFICO------");
-            for (MaterialBibliografico emp : library) {
-                if (emp instanceof Libro) {
+            for (MaterialBibliografico item : library) {
+                if (item instanceof Libro) {
 
-                    Libro bo = (Libro) emp;
+                    Libro bo = (Libro) item;
                     bo.mostrar();
                     System.out.println("----------------------------------------------");
                 } else {
 
-                    ProyectoGrado pr = (ProyectoGrado) emp;
+                    ProyectoGrado pr = (ProyectoGrado) item;
                     pr.mostrar();
                     System.out.println("----------------------------------------------");
                 }
@@ -106,37 +105,37 @@ public class Operaciones {
     }
 
     //buscar el libro
-    public void searchBook() {
+    public void buscarLibro() {
 
         System.out.println("----DIGITE EL TITULO DEL LIBRO: -----");
-        String title = leer.nextLine();
-        boolean ss = false;
+        String titulo = leer.nextLine();
+        boolean estado = false;
 
         for (MaterialBibliografico emp : library) {
-            if (emp.getTitulo().equalsIgnoreCase(title)) {
-                ss = true;
+            if (emp.getTitulo().equalsIgnoreCase(titulo)) {
+                estado = true;
                 System.out.println("----Encontrado---");
                 emp.mostrar();
                 System.out.println("-------------------");
 
             }
         }
-        if (!ss) {
+        if (!estado) {
             System.out.println("no existe");
         }
 
     }
     //revisar el libro
-    public void RevisorSearch() {
+    public void BuscarRevisor() {
 
         System.out.println("DIGITE EL REVISOR:");
         String revisor = leer.nextLine();
 
         boolean estado3 = false;
-        for (MaterialBibliografico emp : library) {
+        for (MaterialBibliografico item : library) {
 
-            if (emp instanceof ProyectoGrado) {
-                ProyectoGrado pr = (ProyectoGrado) emp;
+            if (item instanceof ProyectoGrado) {
+                ProyectoGrado pr = (ProyectoGrado) item;
                 if (pr.getRevisor().equalsIgnoreCase(revisor)) {
                     System.out.println("-----Encontrado-----");
                     pr.mostrar();
@@ -151,18 +150,17 @@ public class Operaciones {
 
     }
 
-    public void DropBookProject() {
+    public void EliminarProyecto() {
         System.out.println("DIGITE EL TITULO PROYECTO O LIBRO QUE DESEA ELIMINAR");
-        String re = leer.nextLine();
+        String respuesta = leer.nextLine();
         boolean estado2 = false;
 
-        for (MaterialBibliografico emp : library) {
-            if (emp instanceof Libro) {
+        for (MaterialBibliografico item : library) {
+            if (item instanceof Libro) {
 
-                Libro bo = (Libro) emp;
+                Libro bo = (Libro) item;
 
-                if (bo.getTitulo().equalsIgnoreCase(re)) {
-                    //bo.mostrar();
+                if (bo.getTitulo().equalsIgnoreCase(respuesta)) {
                     estado2 = true;
                     library.remove(bo);
 
@@ -171,9 +169,8 @@ public class Operaciones {
                 }
 
             } else {
-                ProyectoGrado pr = (ProyectoGrado) emp;
-                if (pr.getTitulo().equalsIgnoreCase(re)) {
-                    //pr.mostrar();
+                ProyectoGrado pr = (ProyectoGrado) item;
+                if (pr.getTitulo().equalsIgnoreCase(respuesta)) {
                     library.remove(pr);
                     estado2 = true;
                     System.out.println("------ELIMINADO EXITOSAMENTE-------");

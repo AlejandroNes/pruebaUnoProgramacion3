@@ -20,6 +20,7 @@ static final long serialVersionUID=42L;
     }
 
     public void mostrar() {
+        System.out.println("================================");
         System.out.println("Titulo:" + titulo);
         System.out.println("Autor:" + autor);
     }

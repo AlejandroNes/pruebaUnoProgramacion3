@@ -32,6 +32,8 @@ public class ProyectoGrado extends MaterialBibliografico  implements Serializabl
         super.mostrar();
         System.out.println("Tutor: "+tutor);
         System.out.println("Revisor: "+revisor);
+        System.out.println("=======PROYECTO DE GRADO==========");
+        System.out.println("");
     }
     
     
