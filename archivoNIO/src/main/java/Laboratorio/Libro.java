@@ -8,15 +8,15 @@ import java.io.Serializable;
  * @author AlejandroNes
  */
 public class Libro extends MaterialBibliografico  implements Serializable{
-     static final long serialVersionUID=43L;
+     static final long serialVersionUID=42L;
     private int edicion;
     private String area;
     
     @Override
     public void mostrar(){
         super.mostrar();
-        System.out.println("Edicion:"+edicion);
-        System.out.println("Area: "+area);
+        System.out.println("Edicion: "+edicion);
+        System.out.println("Area:  "+area);
     }
    
 

@@ -19,18 +19,17 @@ public class Principal {
         Scanner read = new Scanner(System.in);
         Operaciones op= new Operaciones();
         do {
-            System.out.println("######  Menu  #######");
-            System.out.println("1 Registrar Biblioteca y Adicionar materialBibilografica");
-            System.out.println("2 Mostrar todos los libros o proyectos de la BIblioteca");
-            System.out.println("3 Buscar un libro por determinado titulo");
-            System.out.println("4 Buscar proyecto por determinado revisor");
+            System.out.println("------------------MENU PRINCIPAL--------------------");
+            System.out.println("1.- Adicionar materialBibilografico y registrar");
+            System.out.println("2.- Mostrar todos los libros o proyectos que pertenecen a la Biblioteca");
+            System.out.println("3.- Buscar un determinado libro por  titulo");
+            System.out.println("4.- Buscar un determinado proyecto por revisor");//revisor
             
-            System.out.println("5 ELIMINAR proyecto o libro");
-            System.out.println("---files---");
+            System.out.println("5 Eliminar un Libro o Proyecto de grado por deterioro");
             System.out.println("6 Crear archivo");
-          //  System.out.println("7 Guardar los registros");
+            System.out.println("7 Guardar los registros");
            
-            System.out.println("8 Exit");
+            System.out.println("8 Salir");
             System.out.println("Digite one opcion");
             opc = read.nextInt();
 

@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Laboratorio;
 
 import java.io.FileInputStream;
@@ -37,35 +33,35 @@ public class Operaciones {
     }
 
     public void create() {
-        System.out.println("Digite Nombre:");
+        System.out.println("Digite el Nombre:");
         nombre = leer.nextLine();
 
         System.out.println("Digite la Direccion:");
         nombre = leer.nextLine();
 
-        //***************************
-        //String opc;
-        boolean next = true;
+        /*Opciones*/
+        boolean estado = true;
         do {
-            System.out.println("######  Sub Menu  #######");
-            System.out.println("1 Registrar LIBRO");
-            System.out.println("2 Registrar PROYECTO DE GRADO");
-            System.out.println("3 Exit");
-            System.out.println("Digite one opcion");
+            System.out.println("-------------MENU DE OPCIONES------------");
+            System.out.println("1 REGISTRAR LIBRO");
+            System.out.println("2 REGISTRAR PROYECTO DE GRADO");
+            System.out.println("3 SALIR");
+            System.out.println("DIGITE UNA OPCION");
+            System.out.println("-----------------------------------------------");
             int opc = leer.nextInt();
             leer.nextLine();
 
             switch (opc) {
                 case 1:
                     Libro book = new Libro();
-                    System.out.println("Digite el TItulo");
+                    System.out.println("Ingrese el TItulo");
                     book.setTitulo(leer.nextLine());
-                    System.out.println("Digite el Autor");
+                    System.out.println("Ingrese el Autor");
                     book.setAutor(leer.nextLine());
-                    System.out.println("Digite La edicion (one number)");
+                    System.out.println("Ingrese su edicion");
                     book.setEdicion(leer.nextInt());
                     leer.nextLine();
-                    System.out.println("Digite el area");
+                    System.out.println("Ingrese el area");
                     book.setArea(leer.nextLine());
                     library.add(book);
                     break;
@@ -83,84 +79,82 @@ public class Operaciones {
                     library.add(pro);
                     break;
                 default:
-                    next = false;
+                    estado = false;
                     break;
             }
-        } while (next);
-        //**********************
+        } while (estado);
 
     }
 
     public void show() {
         if (!library.isEmpty()) {
-            System.out.println("------LISTA DEMATERIAL BIBLIOGRAFICO------");
+            System.out.println("------LISTA DE MATERIAL BIBLIOGRAFICO------");
             for (MaterialBibliografico emp : library) {
                 if (emp instanceof Libro) {
 
                     Libro bo = (Libro) emp;
                     bo.mostrar();
-                    System.out.println("-------------");
+                    System.out.println("----------------------------------------------");
                 } else {
 
                     ProyectoGrado pr = (ProyectoGrado) emp;
                     pr.mostrar();
-                    System.out.println("------------------");
+                    System.out.println("----------------------------------------------");
                 }
             }
         }
     }
 
+    //buscar el libro
     public void searchBook() {
-        //Buscar un determinado libro por titulo
-        System.out.println("DIGITE EL TITULO DEL LIBRO:");
+
+        System.out.println("----DIGITE EL TITULO DEL LIBRO: -----");
         String title = leer.nextLine();
         boolean ss = false;
-        //*************
+
         for (MaterialBibliografico emp : library) {
             if (emp.getTitulo().equalsIgnoreCase(title)) {
                 ss = true;
-                System.out.println("++++ENCONTRADO++++");
+                System.out.println("----Encontrado---");
                 emp.mostrar();
+                System.out.println("-------------------");
+
             }
         }
         if (!ss) {
-            System.out.println("NO EXISTE");
+            System.out.println("no existe");
         }
 
     }
-
+    //revisar el libro
     public void RevisorSearch() {
 
         System.out.println("DIGITE EL REVISOR:");
         String revisor = leer.nextLine();
 
-        boolean ff = false;
-        //*************
+        boolean estado3 = false;
         for (MaterialBibliografico emp : library) {
 
             if (emp instanceof ProyectoGrado) {
                 ProyectoGrado pr = (ProyectoGrado) emp;
                 if (pr.getRevisor().equalsIgnoreCase(revisor)) {
-                    System.out.println("++++ENCONTRADO++++");
+                    System.out.println("-----Encontrado-----");
                     pr.mostrar();
-                    ff = true;
+                    System.out.println("-----Encontrado-----");
+                    estado3 = true;
 
                     break;
                 }
             }
 
         }
-        /*  if (!ff) {
-            System.out.print("NO EXISTE");
-        }*/
-        System.out.print((!ff) ? "\nNO EXISTE" : "");
 
     }
 
     public void DropBookProject() {
-        System.out.println("DIGITE EL Projecto o libro a Eliminar:(titulo)");
+        System.out.println("DIGITE EL TITULO PROYECTO O LIBRO QUE DESEA ELIMINAR");
         String re = leer.nextLine();
-        boolean ff = false;
+        boolean estado2 = false;
 
         for (MaterialBibliografico emp : library) {
             if (emp instanceof Libro) {
@@ -169,10 +163,10 @@ public class Operaciones {
 
                 if (bo.getTitulo().equalsIgnoreCase(re)) {
                     //bo.mostrar();
-                    ff = true;
+                    estado2 = true;
                     library.remove(bo);
 
-                    System.out.println("------ELIMINADO-------");
+                    System.out.println("------ELIMINADO EXITOSAMENTE-------");
                     break;
                 }
 
@@ -181,23 +175,22 @@ public class Operaciones {
                 if (pr.getTitulo().equalsIgnoreCase(re)) {
                     //pr.mostrar();
                     library.remove(pr);
-                    ff = true;
-                    System.out.println("------ELIMINADO-------");
+                    estado2 = true;
+                    System.out.println("------ELIMINADO EXITOSAMENTE-------");
                     break;
                 }
 
             }
 
         }
-        System.out.print((!ff) ? "\nNO EXISTE" : "");
 
     }
 
-    /*++++++++++++MANEJO DE ARCHIVOS++++++++++++++++*/
 
-    //CREANDO UN ARCHIVO
+    //manejo de archivos con java
+    
+    //creando el archivo
     public void crearArchivo() {
-        //ya debe estar creado el directorio D:\\programacionIII
         Path path = Paths.get("C:\\ProgramacionIII\\archivoBibliografia.txt");
         try {
             if (!Files.exists(path)) {
@@ -211,14 +204,14 @@ public class Operaciones {
     }
     
     
-    //guardando la listacliente dentro del archivo creado con anterioridad
+    //guardando el objeto len el archivo creado 
     public void guardarObjetos() {
         String ruta = "C:\\ProgramacionIII\\archivoBibliografia.txt";
         try {
-            //****SERIALIZAN(BITS) PARA QUE SE GUARDE DENTRO EL ARCHIVO*****
-            FileOutputStream archivo = new FileOutputStream(ruta);//INIALIZAMOS EL ARCHIVO
-            ObjectOutputStream oos = new ObjectOutputStream(archivo);//podamos guardar dentro del archivo
-            //*******
+
+            FileOutputStream archivo = new FileOutputStream(ruta);
+            ObjectOutputStream oos = new ObjectOutputStream(archivo);
+
             oos.writeObject(library);
             oos.close();
             archivo.close();
@@ -230,7 +223,7 @@ public class Operaciones {
         }
     }
     
-    //cargamos los datos del archivo a un list<Cliente>
+    //leemos los archivos guardados
     public void leerObjetos() {
         String ruta = "C:\\ProgramacionIII\\archivoBibliografia.txt";
         try {
@@ -239,7 +232,7 @@ public class Operaciones {
             ObjectInputStream ois = new ObjectInputStream(archivo);
 
             if (ois != null) {
-                library = (List<MaterialBibliografico>) ois.readObject();//realizamos un casteo
+                library = (List<MaterialBibliografico>) ois.readObject();
             } else {
                 System.out.println("El objeto es nulo");
             }

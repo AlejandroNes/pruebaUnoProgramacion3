@@ -1,9 +1,3 @@
-  
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Laboratorio;
 
 import java.io.Serializable;
@@ -13,7 +7,7 @@ import java.io.Serializable;
  * @author AlejandroNes
  */
 public class ProyectoGrado extends MaterialBibliografico  implements Serializable{
-     static final long serialVersionUID=43L;
+     static final long serialVersionUID=42L;
     private String tutor;
     private String revisor;
 
@@ -36,8 +30,8 @@ public class ProyectoGrado extends MaterialBibliografico  implements Serializabl
     @Override
     public void mostrar(){
         super.mostrar();
-        System.out.println("Tutor:"+tutor);
-        System.out.println("Revisor:"+revisor);
+        System.out.println("Tutor: "+tutor);
+        System.out.println("Revisor: "+revisor);
     }
     
     
