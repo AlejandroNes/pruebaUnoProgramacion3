@@ -181,6 +181,9 @@ public class Operaciones {
 
         }
 
+        System.out.print((!estado2) ? "=====NO EXISTE ESE TITULO=====  \n" : "");
+
+
     }
 
 
